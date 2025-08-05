@@ -2,12 +2,14 @@
 
 import { useSearchParams } from 'next/navigation'
 import { Suspense } from 'react'
+import { useForm, ValidationError } from '@formspree/react'
 
 function ContactForm() {
   const searchParams = useSearchParams()
   const submitted = searchParams.get('submitted')
+  const [state, handleSubmit] = useForm("myzpnnbo")
 
-  if (submitted) {
+  if (state.succeeded || submitted) {
     return (
       <div className="min-h-screen bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -50,11 +52,7 @@ function ContactForm() {
           <div className="bg-white rounded-lg shadow-md p-8">
             <h2 className="text-2xl font-bold text-gray-900 mb-6">Send us a message</h2>
             
-            <form action="https://formspree.io/f/apps.ads.dev@gmail.com" method="POST" className="space-y-6">
-              {/* Hidden fields for better form handling */}
-              <input type="hidden" name="_subject" value="New Contact Form Submission from Purple Apps Website" />
-              <input type="hidden" name="_next" value={typeof window !== 'undefined' ? window.location.origin + '/contact?submitted=true' : ''} />
-              <input type="hidden" name="_captcha" value="false" />
+            <form onSubmit={handleSubmit} className="space-y-6">
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
@@ -68,6 +66,11 @@ function ContactForm() {
                     required
                     className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500"
                   />
+                  <ValidationError 
+                    prefix="First Name" 
+                    field="firstName"
+                    errors={state.errors}
+                  />
                 </div>
                 <div>
                   <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">
@@ -79,6 +82,11 @@ function ContactForm() {
                     name="lastName"
                     required
                     className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500"
+                  />
+                  <ValidationError 
+                    prefix="Last Name" 
+                    field="lastName"
+                    errors={state.errors}
                   />
                 </div>
               </div>
@@ -93,6 +101,11 @@ function ContactForm() {
                   name="email"
                   required
                   className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500"
+                />
+                <ValidationError 
+                  prefix="Email" 
+                  field="email"
+                  errors={state.errors}
                 />
               </div>
 
@@ -114,6 +127,11 @@ function ContactForm() {
                   <option value="press">Press & Media</option>
                   <option value="other">Other</option>
                 </select>
+                <ValidationError 
+                  prefix="Subject" 
+                  field="subject"
+                  errors={state.errors}
+                />
               </div>
 
               <div>
@@ -142,6 +160,11 @@ function ContactForm() {
                   placeholder="Please describe your inquiry in detail..."
                   className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500"
                 ></textarea>
+                <ValidationError 
+                  prefix="Message" 
+                  field="message"
+                  errors={state.errors}
+                />
               </div>
 
               <div className="flex items-start">
@@ -162,9 +185,10 @@ function ContactForm() {
 
               <button
                 type="submit"
-                className="w-full bg-primary-600 text-white py-3 px-4 rounded-md font-semibold hover:bg-primary-700 transition duration-200"
+                disabled={state.submitting}
+                className="w-full bg-primary-600 text-white py-3 px-4 rounded-md font-semibold hover:bg-primary-700 transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Send Message
+                {state.submitting ? 'Sending...' : 'Send Message'}
               </button>
             </form>
           </div>

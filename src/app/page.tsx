@@ -50,20 +50,6 @@ export default function Home() {
                 <p className="text-gray-600 mb-4">
                   A self-paced companion app that promotes mental health awareness. Perfect for people who want to work on their own mental health skills or when someone is in need of guidance.
                 </p>
-                <div className="flex space-x-2">
-                  <a
-                    href="#"
-                    className="flex-1 bg-black text-white text-center py-2 px-4 rounded text-sm font-medium hover:bg-gray-800 transition duration-200"
-                  >
-                    App Store
-                  </a>
-                  <a
-                    href="#"
-                    className="flex-1 bg-green-600 text-white text-center py-2 px-4 rounded text-sm font-medium hover:bg-green-700 transition duration-200"
-                  >
-                    Google Play
-                  </a>
-                </div>
               </div>
             </div>
           </div>

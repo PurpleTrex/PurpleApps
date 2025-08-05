@@ -11,15 +11,30 @@
       "static/chunks/main-app.js",
       "static/chunks/app/page.js"
     ],
+    "/apps/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/apps/page.js"
+    ],
     "/contact/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/contact/page.js"
     ],
-    "/apps/page": [
+    "/support/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/apps/page.js"
+      "static/chunks/app/support/page.js"
+    ],
+    "/support/faq/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/support/faq/page.js"
+    ],
+    "/privacy/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/privacy/page.js"
     ]
   }
 }

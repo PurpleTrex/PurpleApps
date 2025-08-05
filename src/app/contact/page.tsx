@@ -1,15 +1,15 @@
 'use client'
 
-import { useSearchParams } from 'next/navigation'
 import { Suspense } from 'react'
 import { useForm, ValidationError } from '@formspree/react'
 
 function ContactForm() {
-  const searchParams = useSearchParams()
-  const submitted = searchParams.get('submitted')
-  const [state, handleSubmit] = useForm("myzpnnbo")
+  const [state, handleSubmit] = useForm("xldlppvp")
 
-  if (state.succeeded || submitted) {
+  // Add some debugging
+  console.log('Form state:', state)
+
+  if (state.succeeded) {
     return (
       <div className="min-h-screen bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -41,8 +41,8 @@ function ContactForm() {
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Contact Us</h1>
-          <p className="text-lg text-gray-600">
+          <h1 className="text-4xl font-bold text-black mb-4">Contact Us</h1>
+          <p className="text-lg text-black">
             Get in touch with our team - we'd love to hear from you
           </p>
         </div>
@@ -50,13 +50,20 @@ function ContactForm() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Form */}
           <div className="bg-white rounded-lg shadow-md p-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Send us a message</h2>
+            <h2 className="text-2xl font-bold text-black mb-6">Send us a message</h2>
             
             <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Debug info */}
+              {state.errors && (
+                <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-4">
+                  <h3 className="text-red-800 font-semibold mb-2">Form Errors:</h3>
+                  <p className="text-red-700 text-sm">{JSON.stringify(state.errors)}</p>
+                </div>
+              )}
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="firstName" className="block text-sm font-medium text-black mb-1">
                     First Name *
                   </label>
                   <input
@@ -64,7 +71,7 @@ function ContactForm() {
                     id="firstName"
                     name="firstName"
                     required
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500 text-black"
                   />
                   <ValidationError 
                     prefix="First Name" 
@@ -73,7 +80,7 @@ function ContactForm() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="lastName" className="block text-sm font-medium text-black mb-1">
                     Last Name *
                   </label>
                   <input
@@ -81,7 +88,7 @@ function ContactForm() {
                     id="lastName"
                     name="lastName"
                     required
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500 text-black"
                   />
                   <ValidationError 
                     prefix="Last Name" 
@@ -92,7 +99,7 @@ function ContactForm() {
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="email" className="block text-sm font-medium text-black mb-1">
                   Email Address *
                 </label>
                 <input
@@ -100,7 +107,7 @@ function ContactForm() {
                   id="email"
                   name="email"
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500 text-black"
                 />
                 <ValidationError 
                   prefix="Email" 
@@ -110,14 +117,14 @@ function ContactForm() {
               </div>
 
               <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="subject" className="block text-sm font-medium text-black mb-1">
                   Subject *
                 </label>
                 <select
                   id="subject"
                   name="subject"
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500 text-black"
                 >
                   <option value="">Select a subject</option>
                   <option value="support">App Support</option>
@@ -135,13 +142,13 @@ function ContactForm() {
               </div>
 
               <div>
-                <label htmlFor="app" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="app" className="block text-sm font-medium text-black mb-1">
                   Which app is this about? (if applicable)
                 </label>
                 <select
                   id="app"
                   name="app"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500 text-black"
                 >
                   <option value="">Select an app</option>
                   <option value="calmbridge">CalmBridge</option>
@@ -149,7 +156,7 @@ function ContactForm() {
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="message" className="block text-sm font-medium text-black mb-1">
                   Message *
                 </label>
                 <textarea
@@ -158,7 +165,7 @@ function ContactForm() {
                   rows={6}
                   required
                   placeholder="Please describe your inquiry in detail..."
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500 text-black"
                 ></textarea>
                 <ValidationError 
                   prefix="Message" 
@@ -177,7 +184,7 @@ function ContactForm() {
                   />
                 </div>
                 <div className="ml-3 text-sm">
-                  <label htmlFor="newsletter" className="text-gray-700">
+                  <label htmlFor="newsletter" className="text-black">
                     I'd like to receive updates about new apps and features
                   </label>
                 </div>
@@ -197,7 +204,7 @@ function ContactForm() {
           <div className="space-y-8">
             {/* Contact Methods */}
             <div className="bg-white rounded-lg shadow-md p-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Get in touch</h2>
+              <h2 className="text-2xl font-bold text-black mb-6">Get in touch</h2>
               
               <div className="space-y-6">
                 <div className="flex items-start">
@@ -207,8 +214,8 @@ function ContactForm() {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900">Email</h3>
-                    <p className="text-gray-600 mt-1">
+                    <h3 className="text-lg font-semibold text-black">Email</h3>
+                    <p className="text-black mt-1">
                       <a href="mailto:apps.ads.dev@gmail.com" className="hover:text-primary-600">
                         apps.ads.dev@gmail.com
                       </a>
@@ -223,8 +230,8 @@ function ContactForm() {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900">Response Time</h3>
-                    <p className="text-gray-600 mt-1">
+                    <h3 className="text-lg font-semibold text-black">Response Time</h3>
+                    <p className="text-black mt-1">
                       We typically respond within 24-48 hours during business days.
                     </p>
                   </div>
@@ -237,8 +244,8 @@ function ContactForm() {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900">Website</h3>
-                    <p className="text-gray-600 mt-1">
+                    <h3 className="text-lg font-semibold text-black">Website</h3>
+                    <p className="text-black mt-1">
                       Purple Apps - Mental Health & Wellness
                     </p>
                   </div>
@@ -248,7 +255,7 @@ function ContactForm() {
 
             {/* Support Resources */}
             <div className="bg-white rounded-lg shadow-md p-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Support Resources</h2>
+              <h2 className="text-2xl font-bold text-black mb-6">Support Resources</h2>
               
               <div className="space-y-4">
                 <a
@@ -261,8 +268,8 @@ function ContactForm() {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900">Help Center</h3>
-                    <p className="text-gray-600 text-sm">Find answers to common questions</p>
+                    <h3 className="font-semibold text-black">Help Center</h3>
+                    <p className="text-black text-sm">Find answers to common questions</p>
                   </div>
                 </a>
 
@@ -276,8 +283,8 @@ function ContactForm() {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900">FAQ</h3>
-                    <p className="text-gray-600 text-sm">Frequently asked questions</p>
+                    <h3 className="font-semibold text-black">FAQ</h3>
+                    <p className="text-black text-sm">Frequently asked questions</p>
                   </div>
                 </a>
 
@@ -291,8 +298,8 @@ function ContactForm() {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900">App Documentation</h3>
-                    <p className="text-gray-600 text-sm">Learn about our apps and features</p>
+                    <h3 className="font-semibold text-black">App Documentation</h3>
+                    <p className="text-black text-sm">Learn about our apps and features</p>
                   </div>
                 </a>
               </div>
@@ -300,13 +307,13 @@ function ContactForm() {
 
             {/* Business Hours */}
             <div className="bg-primary-50 rounded-lg p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-3">Business Hours</h3>
-              <div className="space-y-1 text-sm text-gray-600">
+              <h3 className="text-lg font-semibold text-black mb-3">Business Hours</h3>
+              <div className="space-y-1 text-sm text-black">
                 <p>Monday - Friday: 9:00 AM - 6:00 PM (EST)</p>
                 <p>Saturday: 10:00 AM - 4:00 PM (EST)</p>
                 <p>Sunday: Closed</p>
               </div>
-              <p className="text-xs text-gray-500 mt-3">
+              <p className="text-xs text-black mt-3">
                 Note: Support responses may be delayed during weekends and holidays.
               </p>
             </div>

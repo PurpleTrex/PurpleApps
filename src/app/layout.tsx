@@ -8,7 +8,11 @@ export const metadata = {
   description: 'Discover our collection of innovative mobile apps available on Google Play and iOS App Store. Professional app development services.',
   keywords: 'mobile apps, app development, iOS, Android, Google Play, App Store',
   authors: [{ name: 'Purple Apps' }],
-  viewport: 'width=device-width, initial-scale=1',
+}
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
 }
 
 export default function RootLayout({

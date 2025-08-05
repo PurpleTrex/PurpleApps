@@ -37,8 +37,10 @@ export default function Apps() {
                   App Store
                 </a>
                 <a
-                  href="#"
+                  href="https://play.google.com/store/apps/details?id=com.purple.calm&hl=en-US&ah=3lHO3fcFuhft2S0ouYyGMGhfgWE&pli=1"
                   className="flex-1 bg-green-600 text-white text-center py-3 px-6 rounded-lg font-semibold hover:bg-green-700 transition duration-200"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   Google Play
                 </a>
@@ -119,7 +121,7 @@ export default function Apps() {
             </p>
             
             <div className="bg-white rounded-lg p-8 text-gray-900 max-w-md mx-auto">
-              <form action="https://formspree.io/f/xqkvrwpn" method="POST" className="space-y-6">
+              <form action="https://formspree.io/f/myzpnnbo" method="POST" className="space-y-6">
                 <input type="hidden" name="_subject" value="CalmBridge Beta Testing Signup" />
                 
                 <div>

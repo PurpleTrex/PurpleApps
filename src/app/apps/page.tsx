@@ -109,6 +109,111 @@ export default function Apps() {
             />
           </div>
         </div>
+
+        {/* Beta Testing Section */}
+        <div id="beta-testing" className="bg-primary-600 text-white py-16 mt-16">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h3 className="text-3xl font-bold mb-4">Join CalmBridge Beta Testing</h3>
+            <p className="text-xl text-primary-100 mb-8">
+              Be among the first to experience new features and help us improve CalmBridge
+            </p>
+            
+            <div className="bg-white rounded-lg p-8 text-gray-900 max-w-md mx-auto">
+              <form action="https://formspree.io/f/xqkvrwpn" method="POST" className="space-y-6">
+                <input type="hidden" name="_subject" value="CalmBridge Beta Testing Signup" />
+                
+                <div>
+                  <label htmlFor="beta-email" className="block text-sm font-medium text-gray-700 mb-2">
+                    Email Address *
+                  </label>
+                  <input
+                    type="email"
+                    id="beta-email"
+                    name="_replyto"
+                    required
+                    placeholder="your.email@example.com"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-3">
+                    Which platform are you interested in? *
+                  </label>
+                  <div className="space-y-2">
+                    <label className="flex items-center">
+                      <input
+                        type="radio"
+                        name="platform"
+                        value="iOS"
+                        required
+                        className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300"
+                      />
+                      <span className="ml-2 text-gray-700">iOS (TestFlight)</span>
+                    </label>
+                    <label className="flex items-center">
+                      <input
+                        type="radio"
+                        name="platform"
+                        value="Android"
+                        required
+                        className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300"
+                      />
+                      <span className="ml-2 text-gray-700">Android (Google Play Beta)</span>
+                    </label>
+                    <label className="flex items-center">
+                      <input
+                        type="radio"
+                        name="platform"
+                        value="Both"
+                        required
+                        className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300"
+                      />
+                      <span className="ml-2 text-gray-700">Both iOS & Android</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <label htmlFor="beta-name" className="block text-sm font-medium text-gray-700 mb-2">
+                    Your Name (Optional)
+                  </label>
+                  <input
+                    type="text"
+                    id="beta-name"
+                    name="name"
+                    placeholder="Your name"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="beta-feedback" className="block text-sm font-medium text-gray-700 mb-2">
+                    What interests you most about CalmBridge? (Optional)
+                  </label>
+                  <textarea
+                    id="beta-feedback"
+                    name="feedback"
+                    rows={3}
+                    placeholder="Tell us what drew you to CalmBridge..."
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500"
+                  ></textarea>
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full bg-primary-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-primary-700 transition duration-200"
+                >
+                  Join Beta Testing
+                </button>
+
+                <p className="text-xs text-gray-500 text-center">
+                  We'll contact you when beta spots become available. Your email will only be used for beta testing communications.
+                </p>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   )

@@ -69,12 +69,20 @@ export default function Home() {
           </div>
           
           <div className="text-center mt-12">
-            <a
-              href="/apps"
-              className="inline-block bg-primary-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-700 transition duration-200"
-            >
-              Learn More
-            </a>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href="/apps"
+                className="inline-block bg-primary-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-700 transition duration-200"
+              >
+                Learn More
+              </a>
+              <a
+                href="/apps#beta-testing"
+                className="inline-block bg-white text-primary-600 border-2 border-primary-600 px-8 py-3 rounded-lg font-semibold hover:bg-primary-50 transition duration-200"
+              >
+                Join Beta Testing
+              </a>
+            </div>
           </div>
         </div>
       </section>

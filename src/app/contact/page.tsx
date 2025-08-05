@@ -1,4 +1,40 @@
-export default function Contact() {
+'use client'
+
+import { useSearchParams } from 'next/navigation'
+import { Suspense } from 'react'
+
+function ContactForm() {
+  const searchParams = useSearchParams()
+  const submitted = searchParams.get('submitted')
+
+  if (submitted) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="text-center">
+            <div className="bg-green-50 border border-green-200 rounded-lg p-8 max-w-md mx-auto">
+              <div className="flex items-center justify-center w-12 h-12 mx-auto bg-green-100 rounded-full mb-4">
+                <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <h1 className="text-2xl font-bold text-green-900 mb-2">Message Sent!</h1>
+              <p className="text-green-700 mb-6">
+                Thank you for contacting us. We'll get back to you within 24-48 hours.
+              </p>
+              <a
+                href="/contact"
+                className="inline-flex items-center px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 transition duration-200"
+              >
+                Send Another Message
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -14,7 +50,12 @@ export default function Contact() {
           <div className="bg-white rounded-lg shadow-md p-8">
             <h2 className="text-2xl font-bold text-gray-900 mb-6">Send us a message</h2>
             
-            <form action="https://formspree.io/f/myzpnnbo" method="POST" className="space-y-6">
+            <form action="https://formspree.io/f/apps.ads.dev@gmail.com" method="POST" className="space-y-6">
+              {/* Hidden fields for better form handling */}
+              <input type="hidden" name="_subject" value="New Contact Form Submission from Purple Apps Website" />
+              <input type="hidden" name="_next" value={typeof window !== 'undefined' ? window.location.origin + '/contact?submitted=true' : ''} />
+              <input type="hidden" name="_captcha" value="false" />
+              
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
@@ -249,5 +290,13 @@ export default function Contact() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function ContactPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ContactForm />
+    </Suspense>
   )
 }

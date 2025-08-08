@@ -1,3 +1,5 @@
+import { BannerAd, ResponsiveAd } from './components/AdSense';
+
 export default function Home() {
   return (
     <div className="min-h-screen">
@@ -28,6 +30,13 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Ad Banner */}
+      <div className="py-4 bg-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <BannerAd />
+        </div>
+      </div>
 
       {/* Featured App Section */}
       <section className="py-16 bg-gray-50">
@@ -72,6 +81,13 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Ad Banner */}
+      <div className="py-4 bg-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ResponsiveAd />
+        </div>
+      </div>
 
       {/* About Section */}
       <section className="py-16">

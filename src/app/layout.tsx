@@ -1,7 +1,7 @@
 import './globals.css'
 import { Inter } from 'next/font/google'
 
-const inter = Inter({ subsets: ['latin'], display: 'swap' })
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
   title: 'Purple Apps - Mobile App Development',
@@ -22,6 +22,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        {/* Google AdSense */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1299056564539263"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className={inter.className}>
         <header className="bg-white shadow-sm border-b">
           <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -1,135 +1,233 @@
-import { BannerAd, ResponsiveAd } from './components/AdSense';
+import { BannerAd, ResponsiveAd } from '../components/AdSense';
 
-export default function Home() {
+export default function Apps() {
   return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-primary-600 to-primary-800 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Welcome to Purple Apps
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 text-primary-100">
-              A small dev team creating meaningful mobile apps
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="/apps"
-                className="bg-white text-primary-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-200"
-              >
-                Explore Our Apps
-              </a>
-              <a
-                href="/contact"
-                className="border border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary-600 transition duration-200"
-              >
-                Get in Touch
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Ad Banner */}
-      <div className="py-4 bg-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <BannerAd />
-        </div>
-      </div>
-
-      {/* Featured App Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Our App</h2>
-            <p className="text-lg text-gray-600">
-              Discover CalmBridge - our mental health companion app
-            </p>
-          </div>
-          
-          <div className="flex justify-center">
-            {/* CalmBridge App Card */}
-            <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-200 max-w-md">
-              <div className="h-48 bg-gradient-to-br from-blue-400 to-purple-600 flex items-center justify-center">
-                <img src="/myApps/CalmBridge/icon-512.jpg" alt="CalmBridge" className="w-24 h-24 rounded-2xl shadow-lg" />
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">CalmBridge</h3>
-                <p className="text-gray-600 mb-4">
-                  A self-paced companion app that promotes mental health awareness. Perfect for people who want to work on their own mental health skills or when someone is in need of guidance.
-                </p>
-              </div>
-            </div>
-          </div>
-          
-          <div className="text-center mt-12">
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="/apps"
-                className="inline-block bg-primary-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-700 transition duration-200"
-              >
-                Learn More
-              </a>
-              <a
-                href="/apps#beta-testing"
-                className="inline-block bg-white text-primary-600 border-2 border-primary-600 px-8 py-3 rounded-lg font-semibold hover:bg-primary-50 transition duration-200"
-              >
-                Join Beta Testing
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Ad Banner */}
-      <div className="py-4 bg-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ResponsiveAd />
-        </div>
-      </div>
-
-      {/* About Section */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">
-                About Purple Apps
-              </h2>
-              <p className="text-lg text-gray-600 mb-6">
-                We are a small development team passionate about creating mobile applications that 
-                make a positive impact on people's lives. We focus on quality over quantity, 
-                ensuring each app we build serves a meaningful purpose.
-              </p>
-              <p className="text-lg text-gray-600 mb-8">
-                Currently, we're proud to offer CalmBridge, our mental health companion app designed 
-                to help users on their wellness journey at their own pace.
-              </p>
-              <a
-                href="/contact"
-                className="inline-block bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 transition duration-200"
-              >
-                Work With Us
-              </a>
-            </div>
-            <div className="bg-gradient-to-br from-primary-100 to-primary-200 rounded-lg p-8 h-64 flex items-center justify-center">
-              <div className="text-primary-600 text-8xl">🚀</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Mission Section */}
-      <section className="py-16 bg-primary-600 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold mb-6">Our Mission</h2>
-          <p className="text-xl text-primary-100 max-w-3xl mx-auto">
-            We believe technology should support mental health and wellbeing. 
-            That's why we're committed to creating apps that help people take better care of themselves.
+    <div className="min-h-screen bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">CalmBridge</h1>
+          <p className="text-lg text-gray-600">
+            Your self-paced companion for mental health awareness
           </p>
         </div>
-      </section>
+
+        {/* App Info Section */}
+        <div className="bg-white rounded-lg shadow-lg overflow-hidden max-w-4xl mx-auto mb-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2">
+            {/* App Icon and Info */}
+            <div className="p-8">
+              <div className="flex items-center mb-6">
+                <img src="/myApps/CalmBridge/icon-512.jpg" alt="CalmBridge" className="w-20 h-20 rounded-2xl shadow-lg mr-4" />
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900">CalmBridge</h2>
+                  <p className="text-gray-600">Mental Health Companion</p>
+                </div>
+              </div>
+              
+              <p className="text-gray-700 mb-6 leading-relaxed">
+                CalmBridge is a self-paced companion app that promotes mental health awareness. 
+                Perfect for people who want to work on their own mental health skills or when 
+                someone is in need of guidance. We are so happy you are here and have taken the 
+                steps to be a better version of you!
+              </p>
+
+              <div className="flex space-x-4 mb-6">
+                <a
+                  href="https://testflight.apple.com/join/xaWunEjk"
+                  className="flex-1 bg-black text-white text-center py-3 px-6 rounded-lg font-semibold hover:bg-gray-800 transition duration-200"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  TestFlight (iOS)
+                </a>
+                <a
+                  href="https://play.google.com/store/apps/details?id=com.purple.calm&hl=en-US&ah=3lHO3fcFuhft2S0ouYyGMGhfgWE&pli=1"
+                  className="flex-1 bg-green-600 text-white text-center py-3 px-6 rounded-lg font-semibold hover:bg-green-700 transition duration-200"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Google Play
+                </a>
+              </div>
+            </div>
+
+            {/* Features */}
+            <div className="bg-gray-50 p-8">
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Key Features</h3>
+              <ul className="space-y-3 text-gray-700">
+                <li className="flex items-start">
+                  <span className="text-primary-600 mr-2">✓</span>
+                  Self-paced mental health exercises
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-600 mr-2">✓</span>
+                  Guided wellness activities
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-600 mr-2">✓</span>
+                  Personal progress tracking
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-600 mr-2">✓</span>
+                  Mental health awareness resources
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-600 mr-2">✓</span>
+                  Safe and supportive environment
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* Ad Banner */}
+        <div className="py-4 bg-gray-100 mb-8">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <BannerAd />
+          </div>
+        </div>
+
+        {/* Screenshots */}
+        <div className="text-center mb-8">
+          <h3 className="text-2xl font-bold text-gray-900 mb-8">App Screenshots</h3>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <div className="bg-white rounded-lg shadow-md overflow-hidden">
+            <img 
+              src="/myApps/CalmBridge/screenShots/Screenshot_20250805_091247.png" 
+              alt="CalmBridge Screenshot 1" 
+              className="w-full h-auto"
+            />
+          </div>
+          <div className="bg-white rounded-lg shadow-md overflow-hidden">
+            <img 
+              src="/myApps/CalmBridge/screenShots/Screenshot_20250805_091407.png" 
+              alt="CalmBridge Screenshot 2" 
+              className="w-full h-auto"
+            />
+          </div>
+          <div className="bg-white rounded-lg shadow-md overflow-hidden">
+            <img 
+              src="/myApps/CalmBridge/screenShots/Screenshot_20250805_091422.png" 
+              alt="CalmBridge Screenshot 3" 
+              className="w-full h-auto"
+            />
+          </div>
+          <div className="bg-white rounded-lg shadow-md overflow-hidden">
+            <img 
+              src="/myApps/CalmBridge/screenShots/Screenshot_20250805_091443.png" 
+              alt="CalmBridge Screenshot 4" 
+              className="w-full h-auto"
+            />
+          </div>
+        </div>
+
+        {/* Beta Testing Section */}
+        <div id="beta-testing" className="bg-primary-600 text-white py-16 mt-16">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h3 className="text-3xl font-bold mb-4">Join CalmBridge Beta Testing</h3>
+            <p className="text-xl text-primary-100 mb-8">
+              <strong>iOS TestFlight is now available!</strong> Be among the first to experience new features and help us improve CalmBridge
+            </p>
+            
+            <div className="bg-white rounded-lg p-8 text-gray-900 max-w-md mx-auto">
+              <form action="https://formspree.io/f/myzpnnbo" method="POST" className="space-y-6">
+                <input type="hidden" name="_subject" value="CalmBridge Beta Testing Signup" />
+                
+                <div>
+                  <label htmlFor="beta-email" className="block text-sm font-medium text-gray-700 mb-2">
+                    Email Address *
+                  </label>
+                  <input
+                    type="email"
+                    id="beta-email"
+                    name="_replyto"
+                    required
+                    placeholder="your.email@example.com"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-3">
+                    Which platform are you interested in? *
+                  </label>
+                  <div className="space-y-2">
+                    <label className="flex items-center">
+                      <input
+                        type="radio"
+                        name="platform"
+                        value="iOS"
+                        required
+                        className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300"
+                      />
+                      <span className="ml-2 text-gray-700">iOS (TestFlight)</span>
+                    </label>
+                    <label className="flex items-center">
+                      <input
+                        type="radio"
+                        name="platform"
+                        value="Android"
+                        required
+                        className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300"
+                      />
+                      <span className="ml-2 text-gray-700">Android (Google Play Beta)</span>
+                    </label>
+                    <label className="flex items-center">
+                      <input
+                        type="radio"
+                        name="platform"
+                        value="Both"
+                        required
+                        className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300"
+                      />
+                      <span className="ml-2 text-gray-700">Both iOS & Android</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <label htmlFor="beta-name" className="block text-sm font-medium text-gray-700 mb-2">
+                    Your Name (Optional)
+                  </label>
+                  <input
+                    type="text"
+                    id="beta-name"
+                    name="name"
+                    placeholder="Your name"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="beta-feedback" className="block text-sm font-medium text-gray-700 mb-2">
+                    What interests you most about CalmBridge? (Optional)
+                  </label>
+                  <textarea
+                    id="beta-feedback"
+                    name="feedback"
+                    rows={3}
+                    placeholder="Tell us what drew you to CalmBridge..."
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500"
+                  ></textarea>
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full bg-primary-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-primary-700 transition duration-200"
+                >
+                  Join Beta Testing
+                </button>
+
+                <p className="text-xs text-gray-500 text-center">
+                  We'll contact you when beta spots become available. Your email will only be used for beta testing communications.
+                </p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

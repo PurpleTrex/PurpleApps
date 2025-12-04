@@ -1,0 +1,179 @@
+name: PurpleBilling CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+env:
+  DOTNET_VERSION: '9.0.x'
+  NODE_VERSION: '20.x'
+
+jobs:
+  # Backend Build and Test
+  backend-build:
+    name: Build and Test .NET API
+    runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: purplebilling_test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+      
+      redis:
+        image: redis:7-alpine
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 6379:6379
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+    
+    - name: Restore dependencies
+      run: dotnet restore PurpleBilling/PurpleBilling.sln
+    
+    - name: Build
+      run: dotnet build PurpleBilling/PurpleBilling.sln --configuration Release --no-restore
+    
+    - name: Run tests
+      run: dotnet test PurpleBilling/PurpleBilling.sln --configuration Release --no-build --verbosity normal
+    
+    - name: Security scan
+      run: |
+        dotnet list PurpleBilling/PurpleBilling.sln package --vulnerable --include-transitive
+    
+  # Frontend Build
+  frontend-build:
+    name: Build React Frontend
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+        cache-dependency-path: PurpleBilling/src/PurpleBilling.Frontend/package-lock.json
+    
+    - name: Install dependencies
+      working-directory: PurpleBilling/src/PurpleBilling.Frontend
+      run: npm ci
+    
+    - name: Lint
+      working-directory: PurpleBilling/src/PurpleBilling.Frontend
+      run: npm run lint --if-present
+    
+    - name: Build
+      working-directory: PurpleBilling/src/PurpleBilling.Frontend
+      run: npm run build
+    
+  # Docker Build
+  docker-build:
+    name: Build Docker Images
+    runs-on: ubuntu-latest
+    needs: [backend-build, frontend-build]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+    
+    - name: Log in to Container Registry
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Build and push API image
+      uses: docker/build-push-action@v5
+      with:
+        context: ./PurpleBilling
+        file: ./PurpleBilling/infrastructure/docker/Dockerfile.api
+        push: true
+        tags: |
+          ghcr.io/${{ github.repository }}/api:latest
+          ghcr.io/${{ github.repository }}/api:${{ github.sha }}
+    
+    - name: Build and push Frontend image
+      uses: docker/build-push-action@v5
+      with:
+        context: ./PurpleBilling
+        file: ./PurpleBilling/infrastructure/docker/Dockerfile.frontend
+        push: true
+        tags: |
+          ghcr.io/${{ github.repository }}/frontend:latest
+          ghcr.io/${{ github.repository }}/frontend:${{ github.sha }}
+    
+  # Deploy to Staging
+  deploy-staging:
+    name: Deploy to Staging
+    runs-on: ubuntu-latest
+    needs: [docker-build]
+    if: github.ref == 'refs/heads/develop'
+    environment:
+      name: staging
+      url: https://staging.billing.purpleapps.com
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Deploy to staging server
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.STAGING_HOST }}
+        username: ${{ secrets.STAGING_USER }}
+        key: ${{ secrets.STAGING_SSH_KEY }}
+        script: |
+          cd /opt/purplebilling
+          docker-compose pull
+          docker-compose up -d
+          docker-compose exec -T api dotnet ef database update
+    
+  # Deploy to Production
+  deploy-production:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    needs: [docker-build]
+    if: github.ref == 'refs/heads/main'
+    environment:
+      name: production
+      url: https://billing.purpleapps.com
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Deploy to production server
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.PRODUCTION_HOST }}
+        username: ${{ secrets.PRODUCTION_USER }}
+        key: ${{ secrets.PRODUCTION_SSH_KEY }}
+        script: |
+          cd /opt/purplebilling
+          docker-compose pull
+          docker-compose up -d
+          docker-compose exec -T api dotnet ef database update

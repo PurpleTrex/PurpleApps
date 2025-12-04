@@ -1,0 +1,26 @@
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
+WORKDIR /src
+
+COPY ["PurpleBilling.sln", "./"]
+COPY ["src/PurpleBilling.Core/PurpleBilling.Core.csproj", "src/PurpleBilling.Core/"]
+COPY ["src/PurpleBilling.Data/PurpleBilling.Data.csproj", "src/PurpleBilling.Data/"]
+COPY ["src/PurpleBilling.Services/PurpleBilling.Services.csproj", "src/PurpleBilling.Services/"]
+COPY ["src/PurpleBilling.Integrations/PurpleBilling.Integrations.csproj", "src/PurpleBilling.Integrations/"]
+
+RUN dotnet restore "PurpleBilling.sln"
+
+COPY . .
+
+WORKDIR "/src/src/PurpleBilling.Services"
+RUN dotnet build "PurpleBilling.Services.csproj" -c Release -o /app/build
+RUN dotnet publish "PurpleBilling.Services.csproj" -c Release -o /app/publish
+
+FROM mcr.microsoft.com/dotnet/runtime:9.0 AS runtime
+WORKDIR /app
+
+RUN groupadd -r worker && useradd -r -g worker worker
+USER worker
+
+COPY --from=build /app/publish .
+
+ENTRYPOINT ["dotnet", "PurpleBilling.Services.dll"]

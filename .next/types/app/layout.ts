@@ -1,4 +1,4 @@
-// File: C:\Users\meinr\OneDrive\Desktop\PurpleApps\src\app\layout.tsx
+// File: /home/runner/work/PurpleApps/PurpleApps/src/app/layout.tsx
 import * as entry from '../../../src/app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
